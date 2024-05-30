@@ -1,31 +1,52 @@
 import { Component } from '@angular/core';
+import { SlideComponent } from '../slide/slide.component';
+import { CardComponent } from '../card/card.component';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { FooterComponent } from '../footer/footer.component';
+import { HousingLocation } from '../../housinglocation';
 import { RouterOutlet } from '@angular/router';
-import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
-import { SlideComponent } from "./components/slide/slide.component";
-import { CardComponent } from "./components/card/card.component";
-import { PaginationComponent } from "./components/pagination/pagination.component";
-import { FooterComponent } from "./components/footer/footer.component";
-import { HousingLocation } from './housinglocation';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from "./components/home/home.component";
-
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
-    template: `
-    <!-- <section class="results">
+  selector: 'app-home',
+  standalone: true,
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
+  imports: [
+    SlideComponent,
+    CardComponent,
+    PaginationComponent,
+    FooterComponent,
+    RouterOutlet,
+    NavBarComponent,
+    SlideComponent,
+    CardComponent,
+    PaginationComponent,
+    FooterComponent,
+    CommonModule,
+  ],
+  template: `
+    <div class="slide-bar">
+      <app-slide></app-slide>
+    </div>
+    <section class="results">
       <app-card
-        *ngFor="let housingLocation of housingLocationList"
-        [housingLocation]="housingLocation">
-      </app-card>
-    </section> -->
-    `,
-    imports: [RouterOutlet, NavBarComponent, SlideComponent, CardComponent, PaginationComponent, FooterComponent, CommonModule, HomeComponent]
+        *ngFor="let hs of housingLocationList"
+        [housingLocation]="hs"
+      ></app-card>
+    </section>
+
+    <div class="pagination">
+      <app-pagination></app-pagination>
+    </div>
+
+    <div class="footer">
+      <app-footer></app-footer>
+    </div>
+  `,
 })
-export class AppComponent {
+export class HomeComponent {
   title = 'demo';
   housingLocationList: HousingLocation[] = [
     {
@@ -110,5 +131,5 @@ export class AppComponent {
       id: 12,
       profile: `Tỉnh lại sau giấc ngủ, thế giới đại biến. Quen thuộc cao trung truyền thụ chính là phép thuật, nói cho mọi người muốn trở thành một tên xuất sắc Ma Pháp Sư. Ở lại đô thị ở ngoài du đãng tập kích nhân loại ma vật yêu thú, mắt nhìn chằm chằm. `
     },
-  ]
+  ];
 }

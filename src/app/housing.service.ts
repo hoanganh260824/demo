@@ -1,33 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
-import { SlideComponent } from "./components/slide/slide.component";
-import { CardComponent } from "./components/card/card.component";
-import { PaginationComponent } from "./components/pagination/pagination.component";
-import { FooterComponent } from "./components/footer/footer.component";
+import { Injectable } from '@angular/core';
 import { HousingLocation } from './housinglocation';
-import { CommonModule } from '@angular/common';
-import { HomeComponent } from "./components/home/home.component";
 
-
-@Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
-    template: `
-    <!-- <section class="results">
-      <app-card
-        *ngFor="let housingLocation of housingLocationList"
-        [housingLocation]="housingLocation">
-      </app-card>
-    </section> -->
-    `,
-    imports: [RouterOutlet, NavBarComponent, SlideComponent, CardComponent, PaginationComponent, FooterComponent, CommonModule, HomeComponent]
+@Injectable({
+  providedIn: 'root'
 })
-export class AppComponent {
-  title = 'demo';
-  housingLocationList: HousingLocation[] = [
+export class HousingService {
+  protected housingLocationList: HousingLocation[] = [
     {
       name: 'Onepunch Man',
       photo: `https://i.truyenvua.com/ebook/190x247/onepunch-man_1552232163.jpg?gt=hdfgdfg&mobile=2`,
@@ -110,5 +88,17 @@ export class AppComponent {
       id: 12,
       profile: `Tỉnh lại sau giấc ngủ, thế giới đại biến. Quen thuộc cao trung truyền thụ chính là phép thuật, nói cho mọi người muốn trở thành một tên xuất sắc Ma Pháp Sư. Ở lại đô thị ở ngoài du đãng tập kích nhân loại ma vật yêu thú, mắt nhìn chằm chằm. `
     },
-  ]
+  ];
+
+  constructor() { }
+
+  getAllHousingLocations(): HousingLocation[] {
+    return this.housingLocationList;
+  }
+
+  getHousingLocationById(id: number): HousingLocation | undefined {
+    return this.housingLocationList.find(housingLocation => housingLocation.id === id);
+  }
+
 }
+
